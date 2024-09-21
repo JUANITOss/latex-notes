@@ -1,0 +1,187 @@
+\documentclass{article}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+
+\title{Set Theory: Understanding Bayesian Notation and Events}
+\author{by Juan Suazo Verger}
+\date{}
+
+\begin{document}
+
+\maketitle
+
+\newpage
+\section{Bayesian Notation}
+Bayesian notation is a framework for understanding probability that emphasizes the role of prior knowledge. Bayes' theorem describes how to update the probability of a hypothesis \(A\) given new evidence \(B\). It is mathematically expressed as:
+
+\[
+P(A|B) = \frac{P(B|A) \cdot P(A)}{P(B)}
+\]
+
+\textbf{where}:
+\begin{itemize}
+    \item \(P(A|B)\) is the posterior probability of \(A\) given \(B\),
+    \item \(P(B|A)\) is the likelihood of observing \(B\) if \(A\) is true,
+    \item \(P(A)\) is the prior probability of \(A\),
+    \item \(P(B)\) is the marginal probability of \(B\).
+\end{itemize}
+
+\vspace{1em}
+\textbf{Example:} If a medical test for a disease has a 99\% accuracy rate and the disease affects 1\% of the population, Bayes' theorem can be used to find the probability that a person who tests positive actually has the disease.
+
+\newpage
+
+\section{Multiple Events}
+Multiple events are scenarios in probability where two or more events can occur simultaneously. The total probability of multiple events can be determined using the principles of intersection and union.
+
+\vspace{1em}
+\textbf{Notation:} If \(A\) and \(B\) are two events, the probability of either event occurring is expressed as:
+
+\[
+P(A \cup B) = P(A) + P(B) - P(A \cap B)
+\]
+
+When events are independent, this simplifies as:
+
+\[
+P(A \cap B) = P(A) \cdot P(B)
+\]
+
+\newpage
+
+\section{Intersection}
+The intersection of two events \(A\) and \(B\) (denoted \(A \cap B\)) occurs when both events happen at the same time. The probability of the intersection is crucial for determining how events overlap.
+
+\vspace{1em}
+\textbf{Formula:}
+\[
+P(A \cap B) = P(A) \cdot P(B|A) = P(B) \cdot P(A|B)
+\]
+
+\textbf{Example:} If \(P(A) = 0.5\) and \(P(B|A) = 0.4\), then:
+\[
+P(A \cap B) = 0.5 \cdot 0.4 = 0.2
+\]
+
+\newpage
+
+\section{Union}
+The union of two events \(A\) and \(B\) (denoted \(A \cup B\)) encompasses all outcomes where at least one of the events occurs. This concept is critical for calculating probabilities when considering multiple events.
+
+\vspace{1em}
+\textbf{Formula:}
+\[
+P(A \cup B) = P(A) + P(B) - P(A \cap B)
+\]
+\vspace{1em}
+\textbf{Example:} If \(P(A) = 0.5\) and \(P(B) = 0.6\) with \(P(A \cap B) = 0.2\), then:
+\[
+P(A \cup B) = 0.5 + 0.6 - 0.2 = 0.9
+\]
+
+\newpage
+
+\section{Mutually Exclusive Sets}
+Two events \(A\) and \(B\) are mutually exclusive if they cannot occur simultaneously, meaning:
+
+\[
+P(A \cap B) = 0
+\]
+
+In this case, the probability of their union simplifies to:
+
+\[
+P(A \cup B) = P(A) + P(B)
+\]
+\vspace{1em}
+\textbf{Example:} When rolling a die, the events of rolling a 2 and rolling a 5 are mutually exclusive.
+
+\newpage
+
+\section{Independent and Dependent Events}
+Events are independent if the occurrence of one does not influence the occurrence of the other. Conversely, if one event affects the other, they are dependent.
+
+\vspace{1em}
+\textbf{Independent Events:}
+\[
+P(A \cap B) = P(A) \cdot P(B)
+\]
+
+\textbf{Dependent Events:}
+\[
+P(A \cap B) = P(A) \cdot P(B|A)
+\]
+\vspace{1em}
+\textbf{Example:} Drawing two cards from a deck without replacement is a dependent event. The probability of drawing a second card changes based on the first card drawn.
+
+\newpage
+
+\section{Conditional Probability}
+Conditional probability quantifies the likelihood of an event \(A\) occurring given that another event \(B\) has occurred. It is denoted as \(P(A|B)\) and calculated as:
+
+\[
+P(A|B) = \frac{P(A \cap B)}{P(B)}
+\]
+\vspace{1em}
+\textbf{Example:} If 60\% of students pass a test, and 80\% of those who studied pass, the probability that a student who studied passes is:
+
+\[
+P(\text{Pass}|\text{Studied}) = \frac{0.48}{0.6} = 0.8
+\]
+
+\newpage
+
+\section{Law of Total Probability}
+The law of total probability expresses the total probability of an event based on different scenarios that can lead to that event. If \(\{B_1, B_2, \ldots, B_n\}\) is a partition of the sample space, then:
+
+\[
+P(A) = \sum_{i=1}^{n} P(A|B_i) P(B_i)
+\]
+\vspace{1em}
+\textbf{Example:} To find the probability of winning a game, we can consider different strategies as partitions.
+
+\newpage
+
+\section{Additive Law}
+The additive law provides a method to calculate the probability of the union of two events, accounting for the possibility of overlap:
+
+\[
+P(A \cup B) = P(A) + P(B) - P(A \cap B)
+\]
+
+This is particularly useful when \(A\) and \(B\) are not mutually exclusive.
+
+\newpage
+
+\section{The Multiplication Rule}
+The multiplication rule helps calculate the probability of the intersection of two events. For independent events:
+
+\[
+P(A \cap B) = P(A) \cdot P(B)
+\]
+
+For dependent events:
+
+\[
+P(A \cap B) = P(A) \cdot P(B|A)
+\]
+\vspace{1em}
+\textbf{Example:} If the probability of rain on a given day is 0.3, and the probability of bringing an umbrella given it's raining is 0.9, then:
+
+\[
+P(\text{Rain} \cap \text{Umbrella}) = 0.3 \cdot 0.9 = 0.27
+\]
+
+\newpage
+
+\section{Bayes’ Law}
+Bayes' Law is a fundamental theorem in probability theory that describes how to update the probability of a hypothesis based on new evidence. It is expressed as:
+
+\[
+P(A|B) = \frac{P(B|A) \cdot P(A)}{P(B)}
+\]
+\vspace{1em}
+\textbf{Example:} In a disease testing scenario, if the probability of having a disease is \(P(A)\) and the probability of a positive test given that the disease is present is \(P(B|A)\), Bayes' law allows you to find \(P(A|B)\).
+
+\end{document}

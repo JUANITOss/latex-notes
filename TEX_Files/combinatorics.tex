@@ -1,0 +1,200 @@
+\documentclass{article}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+
+\title{Combinatorics: Understanding Permutations, Variations, and Combinations}
+\author{by Juan Suazo Verger}
+\date{}
+
+\begin{document}
+
+\maketitle
+
+\newpage
+\section{Permutations (No Repetition)}
+
+\subsection{Definition}
+Permutations count the number of ways to arrange all elements of a set where \textbf{order matters} and \textbf{no element repeats}.
+
+\subsection{Formula}
+\[
+P(n) = n!
+\]
+Where \(n\)! (n factorial) is the product of all positive integers up to \(n\).
+
+\subsection{Example}
+Imagine you have 3 different books and you want to arrange them on a shelf. The number of possible arrangements is:
+\[
+P(3) = 3! = 3 \times 2 \times 1 = 6
+\]
+Arrangements: (Book1, Book2, Book3), (Book1, Book3, Book2), etc.
+
+\subsection{When to Apply}
+- Use permutations when you need to arrange all items in a specific order.
+- Example scenarios: Arranging people in a line, shuffling cards.
+
+\newpage
+\section{Permutations (With Repetition)}
+
+\subsection{Definition}
+Permutations with repetition allow \textbf{elements to be repeated} in the arrangement. The order still matters.
+
+\subsection{Formula}
+\[
+P(n, r) = n^r
+\]
+Where \(n\) is the number of distinct items, and \(r\) is the number of positions.
+
+\subsection{Example}
+Imagine you have 3 different letters (A, B, C) and you want to create a 2-letter code, where letters can repeat. The number of possible 2-letter codes is:
+\[
+P(3, 2) = 3^2 = 9
+\]
+Possible codes: AA, AB, AC, BA, BB, BC, etc.
+
+\subsection{When to Apply}
+- When order matters and elements can repeat.
+- Example scenarios: Creating codes or passwords where characters can repeat.
+
+\newpage
+\section{Variations (No Repetition)}
+
+\subsection{Definition}
+Variations (or arrangements) deal with selecting and ordering a subset of elements, where \textbf{order matters}, but \textbf{elements are not repeated}.
+
+\subsection{Formula}
+\[
+V(n, r) = \frac{n!}{(n - r)!}
+\]
+Where \(n\) is the total number of elements, and \(r\) is the number of elements to arrange.
+
+\subsection{Example}
+Imagine you have 5 people and you want to select 3 of them to form a committee with specific roles. The number of ways to assign the roles is:
+\[
+V(5, 3) = \frac{5!}{(5 - 3)!} = \frac{5!}{2!} = \frac{120}{2} = 60
+\]
+Possible combinations: (Person1, Person2, Person3), (Person2, Person3, Person1), etc.
+
+\subsection{When to Apply}
+- Use when you are selecting a subset and arranging it in a specific order.
+- Example scenarios: Choosing teams for different roles (e.g., leader, assistant, etc.).
+
+\newpage
+\section{Variations (With Repetition)}
+
+\subsection{Definition}
+This allows selecting and arranging a subset where \textbf{order matters}, and \textbf{elements can repeat}.
+
+\subsection{Formula}
+\[
+V(n, r) = n^r
+\]
+
+\subsection{Example}
+Imagine you have 4 different colors and want to paint 3 rooms, where each room can be painted the same or a different color. The number of ways to paint the rooms is:
+\[
+V(4, 3) = 4^3 = 64
+\]
+Possible combinations: (Red, Red, Blue), (Green, Yellow, Green), etc.
+
+\subsection{When to Apply}
+- Use when selecting a subset with order and allowing repetition.
+- Example scenarios: Choosing ice cream flavors for scoops where the same flavor can be used multiple times.
+
+\newpage
+\section{Combinations (No Repetition)}
+
+\subsection{Definition}
+Combinations are used when \textbf{order doesn’t matter} and \textbf{elements cannot repeat}.
+
+\subsection{Formula}
+\[
+C(n, r) = \binom{n}{r} = \frac{n!}{r!(n - r)!}
+\]
+Where \(n\) is the total number of elements, and \(r\) is the number of elements to select.
+
+\subsection{Example}
+Imagine you have 5 different fruits and want to pick 3 for a fruit salad, where the order in which you pick them doesn’t matter. The number of ways to choose the fruits is:
+\[
+C(5, 3) = \frac{5!}{3!(5 - 3)!} = \frac{120}{6 \times 2} = 10
+\]
+Possible combinations: (Apple, Banana, Cherry), (Apple, Banana, Grape), etc.
+
+\subsection{When to Apply}
+- Use combinations when selecting a subset without regard to order.
+- Example scenarios: Choosing lottery numbers, selecting a team from a group where roles don’t matter.
+
+\newpage
+\section{Combinations (With Repetition)}
+
+\subsection{Definition}
+Combinations with repetition allow \textbf{elements to be repeated}, but \textbf{order does not matter}.
+
+\subsection{Formula}
+\[
+C(n + r - 1, r) = \frac{(n + r - 1)!}{r!(n - 1)!}
+\]
+
+\subsection{Example}
+Imagine you have 3 types of cookies (chocolate, vanilla, strawberry) and want to select 4 cookies, allowing repeats. The number of ways to choose the cookies is:
+\[
+C(3 + 4 - 1, 4) = C(6, 4) = \frac{6!}{4!2!} = \frac{720}{24 \times 2} = 15
+\]
+Possible combinations: (2 chocolate, 1 vanilla, 1 strawberry), etc.
+
+\subsection{When to Apply}
+- Use when you need to select a subset allowing repetition but without regard to order.
+- Example scenarios: Dividing items into groups where duplicates are allowed (e.g., scooping flavors for ice cream).
+
+\newpage
+\section{Symmetry in Combinations}
+
+The \textbf{binomial coefficient} \(\binom{n}{k}\) has an important property called \textbf{symmetry}. This is expressed as:
+
+\[
+\binom{n}{k} = \binom{n}{n-k}
+\]
+
+This means that the number of ways to choose \(k\) elements from a set of \(n\) elements is the same as the number of ways to choose \(n-k\) elements.
+
+\subsection{Example}
+If \(n = 5\) and \(k = 2\), then:
+\[
+\binom{5}{2} = \binom{5}{3} = 10
+\]
+
+\newpage
+\section{Alternative Notations for Combinations}
+
+Combinations are often represented in different notations. For example:
+
+\[
+\binom{n}{k} = C_k^n = C(n, k)
+\]
+
+All of these notations represent the same concept: choosing \(k\) elements from \(n\).
+
+- \(\binom{n}{k}\) is the standard binomial coefficient notation.
+
+- \(C_k^n\) is an alternative notation.
+
+- \(C(n, k)\) is another alternative used in some contexts.
+
+\newpage
+\section{How to Recognize and Apply Each Formula}
+
+\begin{itemize}
+  \item \textbf{Order Matters?} 
+    \begin{itemize}
+      \item Yes: Use \textbf{permutations} or \textbf{variations}.
+      \item No: Use \textbf{combinations}.
+    \end{itemize}
+  \item \textbf{Repetition Allowed?}
+    \begin{itemize}
+      \item Yes: Use \textbf{permutations} or \textbf{combinations} \textbf{with repetition}.
+      \item No: Use \textbf{permutations} or \textbf{combinations} \textbf{without repetition}.
+    \end{itemize}
+\end{itemize}
+
+\end{document}
