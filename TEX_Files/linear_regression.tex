@@ -1,0 +1,200 @@
+\documentclass{article}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+
+\title{Linear Regression}
+\author{by Juan Suazo Verger}
+\date{}
+
+\begin{document}
+
+\maketitle
+
+\newpage
+\section{Introduction to Linear Regression}
+
+Linear regression is a method used to model the relationship between a dependent variable \(y\) and one or more independent variables \(x\). The simplest form, known as simple linear regression, assumes a linear relationship between two variables, represented by the equation:
+
+\[
+\hat{y} = b_0 + b_1 x
+\]
+
+where:
+\begin{itemize}
+    \item \(\hat{y}\) is the predicted value.
+    \item \(b_0\) is the intercept (constant term).
+    \item \(b_1\) is the slope of the regression line.
+    \item \(x\) is the independent variable.
+\end{itemize}
+
+In the case of multiple linear regression, we extend this to multiple predictors \(x_1, x_2, \dots, x_n\):
+
+\[
+\hat{y} = b_0 + b_1 x_1 + b_2 x_2 + \dots + b_n x_n
+\]
+
+\newpage
+\section{Types of Linear Regression and When to Use Them}
+
+\subsection{Simple Linear Regression}
+Used when there is only one independent variable. 
+\begin{itemize}
+    \item \textbf{Example:} Predicting a student's test score based on the number of hours studied.
+\end{itemize}
+
+\subsection{Multiple Linear Regression}
+Used when there are multiple independent variables.
+\begin{itemize}
+    \item \textbf{Example:} Predicting a house price based on features such as size, number of bedrooms, and location.
+\end{itemize}
+
+\subsection{Polynomial Regression}
+Used when the relationship between the independent and dependent variable is non-linear.
+\begin{itemize}
+    \item \textbf{Example:} Predicting the growth of a plant over time, which may not follow a straight line.
+\end{itemize}
+
+\subsection{Ridge Regression}
+Used when there is multicollinearity in the data, adding a penalty term to the OLS loss function.
+\begin{itemize}
+    \item \textbf{Example:} Predicting stock prices with correlated predictors, like various economic indicators.
+\end{itemize}
+
+\subsection{Lasso Regression}
+Similar to ridge regression but performs variable selection by penalizing the absolute size of coefficients.
+\begin{itemize}
+    \item \textbf{Example:} Selecting the most relevant features in high-dimensional datasets, such as genetic data.
+\end{itemize}
+
+\newpage
+\section{Using Categorical Variables in Linear Regression}
+
+Categorical variables can be included in linear regression models using dummy coding. This technique involves creating binary variables for each category of the categorical variable.
+
+\subsection{Example of Dummy Coding}
+Suppose we have a categorical variable "Color" with three categories: Red, Blue, and Green. We would create two dummy variables:
+\begin{itemize}
+    \item \(D_1 = 1\) if the color is Red, 0 otherwise.
+    \item \(D_2 = 1\) if the color is Blue, 0 otherwise.
+\end{itemize}
+The Green category serves as the reference category. The regression equation would then look like:
+
+\[
+\hat{y} = b_0 + b_1 D_1 + b_2 D_2 + b_3 x
+\]
+
+where \(x\) represents other numerical predictors.
+
+\newpage
+\section{Ordinary Least Squares (OLS) Method}
+
+The Ordinary Least Squares (OLS) method estimates the coefficients of the linear regression model by minimizing the sum of the squared differences between the observed and predicted values:
+
+\[
+\min_{\beta} \sum_{i=1}^{n} (y_i - \hat{y_i})^2
+\]
+
+The OLS estimates can be obtained using matrix algebra:
+
+\[
+\hat{\beta} = (X^TX)^{-1}X^Ty
+\]
+
+where \(X\) is the matrix of independent variables, \(y\) is the vector of dependent variable observations, and \(\hat{\beta}\) contains the estimated coefficients.
+
+\newpage
+\subsection{Assumptions of OLS}
+
+To make valuable use of the OLS method, several key assumptions must be met:
+
+\begin{enumerate}
+    \item \textbf{Linearity:} The relationship between the independent and dependent variables must be linear. This can be assessed using scatterplots or residual plots.
+    
+    \item \textbf{Independence:} Observations must be independent of each other. This assumption is critical in time series data where autocorrelation can occur.
+    
+    \item \textbf{Homoscedasticity:} The variance of the error terms should be constant across all levels of the independent variables. Plotting residuals against predicted values can help check for homoscedasticity.
+    
+    \item \textbf{No Autocorrelation:} In time series data, the residuals should not be correlated with each other. This can be tested using the Durbin-Watson statistic.
+    
+    \item \textbf{No Perfect Multicollinearity:} The independent variables should not be perfectly correlated. Variance Inflation Factor (VIF) can be calculated to detect multicollinearity.
+    
+    \item \textbf{Normality of Errors:} The residuals should be normally distributed, which can be checked using a Q-Q plot or a histogram of residuals.
+\end{enumerate}
+
+If these assumptions are violated, the estimates produced by OLS may be biased or inefficient. In such cases, alternative methods or adjustments may be necessary.
+
+\newpage
+\section{Python Methods for Linear Regression}
+
+In Python, we can perform linear regression using various libraries. Some of the most common methods are:
+
+\subsection{Using \texttt{scikit-learn}}
+
+\begin{verbatim}
+from sklearn.linear_model import LinearRegression
+model = LinearRegression()
+model.fit(X_train, y_train)
+predictions = model.predict(X_test)
+\end{verbatim}
+
+This method fits a linear model to the data by minimizing the OLS loss function.
+
+\subsection{Using \texttt{statsmodels}}
+
+\begin{verbatim}
+import statsmodels.api as sm
+X = sm.add_constant(X)
+model = sm.OLS(y, X).fit()
+predictions = model.predict(X)
+\end{verbatim}
+
+This method provides additional statistical information such as p-values and confidence intervals.
+
+\subsection{Using \texttt{numpy}}
+
+\begin{verbatim}
+import numpy as np
+beta = np.linalg.inv(X.T @ X) @ X.T @ y
+\end{verbatim}
+
+This approach manually computes the OLS estimates using matrix algebra.
+
+\newpage
+\section{Other Regression Methods}
+
+Apart from OLS, there are other methods to estimate the parameters of a regression model, which are useful in different scenarios:
+
+\subsection{Generalized Least Squares (GLS)}
+GLS is used when there is heteroscedasticity (non-constant variance of errors) or autocorrelation in the data. The equation remains the same, but the method accounts for the structure of the error term.
+
+\subsection{Maximum Likelihood Estimation (MLE)}
+MLE maximizes the likelihood function, which represents the probability of observing the given data given the model parameters.
+
+\subsection{Bayesian Regression}
+In Bayesian regression, we assume prior distributions for the parameters and update them based on the observed data.
+
+\subsection{Kernel Regression}
+Kernel regression is a non-parametric technique that does not assume a specific form for the relationship between the variables.
+
+\subsection{Gaussian Process Regression}
+Gaussian Process Regression is a flexible probabilistic model that captures uncertainty about the regression function.
+
+\newpage
+\section{Key Metrics in Linear Regression}
+
+\begin{itemize}
+    \item \textbf{Coefficient of Determination \(R^2\)}: Measures the proportion of the variance in the dependent variable that is predictable from the independent variable(s).
+    \[
+    R^2 = 1 - \frac{\sum_{i=1}^{n} (y_i - \hat{y_i})^2}{\sum_{i=1}^{n} (y_i - \bar{y})^2}
+    \]
+    \item \textbf{P-value of t-statistic}: Determines whether the individual predictor variables are statistically significant.
+    \item \textbf{F-statistic}: Assesses the overall significance of the regression model.
+\end{itemize}
+
+\newpage
+\section{Conclusion}
+
+Linear regression is a fundamental tool in data science, offering a straightforward way to model and predict relationships between variables. While OLS is a common estimation method, understanding its assumptions and alternative methods such as GLS, MLE, and Bayesian regression can provide better results depending on the data structure.
+
+\end{document}
