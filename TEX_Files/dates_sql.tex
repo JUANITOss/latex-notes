@@ -1,0 +1,79 @@
+\documentclass{article}
+\usepackage{listings}
+\usepackage{xcolor}
+
+\definecolor{codegray}{gray}{0.9}
+\lstset{
+    backgroundcolor=\color{codegray},
+    basicstyle=\ttfamily,
+    columns=fullflexible,
+    keepspaces=true,
+    frame=single,
+    breaklines=true,
+    keywordstyle=\bfseries,
+    morekeywords={SELECT, FROM, WHERE, AS, BETWEEN, CURDATE, DATE_ADD, DATE_SUB, TIMESTAMPDIFF, DAYOFWEEK, NOW, CURTIME, AVG, GROUP BY},
+}
+
+\begin{document}
+
+\section*{SQL Date Manipulation Cheat Sheet}
+
+\begin{lstlisting}
+1. Extracting Parts of a Date:
+   SELECT YEAR(date_column) AS year,
+          MONTH(date_column) AS month,
+          DAY(date_column) AS day
+   FROM table_name;
+
+   SELECT HOUR(datetime_column) AS hour,
+          MINUTE(datetime_column) AS minute,
+          SECOND(datetime_column) AS second
+   FROM table_name;
+
+   SELECT WEEK(date_column) AS week_number FROM table_name;
+   SELECT DAYOFWEEK(date_column) AS day_of_week FROM table_name;
+   SELECT DAYOFYEAR(date_column) AS day_of_year FROM table_name;
+   SELECT QUARTER(date_column) AS quarter FROM table_name;
+
+2. Adding/Subtracting Dates:
+   SELECT DATE_ADD(date_column, INTERVAL 5 DAY) AS future_date FROM table_name;
+   SELECT DATE_SUB(date_column, INTERVAL 5 DAY) AS past_date FROM table_name;
+   SELECT DATE_ADD(date_column, INTERVAL 2 MONTH) AS future_date FROM table_name;
+   SELECT DATE_ADD(datetime_column, INTERVAL 3 HOUR) AS future_time FROM table_name;
+
+3. Comparing Dates:
+   SELECT * FROM table_name WHERE date_column < CURDATE();  -- past
+   SELECT * FROM table_name WHERE date_column > CURDATE();  -- future
+   SELECT * FROM table_name WHERE date_column = CURDATE();  -- today
+   SELECT * FROM table_name 
+   WHERE date_column BETWEEN '2024-01-01' AND '2024-12-31'; -- date range
+
+4. Formatting Dates:
+   SELECT DATE_FORMAT(date_column, '%Y-%m-%d') AS formatted_date FROM table_name;
+   -- Example: '%d/%m/%Y %H:%i:%s' would return '02/10/2024 14:30:45'
+
+5. Calculating the Difference Between Dates:
+   SELECT DATEDIFF('2024-10-10', '2024-01-01') AS days_difference;
+   SELECT TIMESTAMPDIFF(MONTH, '2023-01-01', '2024-10-10') AS months_difference;
+   SELECT TIMESTAMPDIFF(HOUR, '2024-01-01 08:00:00', '2024-01-01 18:00:00') AS hours_difference;
+
+6. Getting the Current Date and Time:
+   SELECT CURDATE() AS current_date;
+   SELECT CURTIME() AS current_time;
+   SELECT NOW() AS current_datetime;
+
+7. Working with Weekdays and Weekends:
+   SELECT * FROM table_name WHERE DAYOFWEEK(date_column) IN (1, 7); -- weekend
+   SELECT * FROM table_name WHERE DAYOFWEEK(date_column) BETWEEN 2 AND 6; -- weekday
+
+8. Truncating Dates:
+   SELECT DATE_FORMAT(date_column, '%Y-%m-01') AS first_of_month FROM table_name;
+   SELECT DATE(datetime_column) AS truncated_date FROM table_name;
+
+9. Date Arithmetic with INTERVAL:
+   SELECT DATE_ADD(date_column, INTERVAL 2 WEEK) AS future_date FROM table_name;
+   SELECT LAST_DAY(date_column) AS last_day_of_month FROM table_name;
+   SELECT MAKEDATE(YEAR(CURDATE()), 1) AS first_day_of_year;
+\end{lstlisting}
+
+\end{document}

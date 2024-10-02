@@ -1,0 +1,68 @@
+\documentclass{article}
+\usepackage{listings}
+\usepackage{xcolor}
+
+\definecolor{codegray}{gray}{0.9}
+\lstset{
+    backgroundcolor=\color{codegray},
+    basicstyle=\ttfamily,
+    columns=fullflexible,
+    keepspaces=true,
+    frame=single,
+    breaklines=true,
+    keywordstyle=\bfseries,
+    morekeywords={SELECT, FROM, WHERE, INNER JOIN, LEFT JOIN, RIGHT JOIN, FULL OUTER JOIN, ON, USING},
+}
+
+\begin{document}
+
+\section*{SQL JOIN Types Cheat Sheet}
+
+\begin{lstlisting}
+1. INNER JOIN:
+   -- Returns only the rows with matching values in both tables.
+   SELECT columns
+   FROM table1
+   INNER JOIN table2 ON table1.common_column = table2.common_column;
+
+2. LEFT JOIN (or LEFT OUTER JOIN):
+   -- Returns all rows from the left table, and the matched rows from the right table. 
+   -- If no match, NULL values are returned for columns from the right table.
+   SELECT columns
+   FROM table1
+   LEFT JOIN table2 ON table1.common_column = table2.common_column;
+
+3. RIGHT JOIN (or RIGHT OUTER JOIN):
+   -- Returns all rows from the right table, and the matched rows from the left table. 
+   -- If no match, NULL values are returned for columns from the left table.
+   SELECT columns
+   FROM table1
+   RIGHT JOIN table2 ON table1.common_column = table2.common_column;
+
+4. FULL OUTER JOIN:
+   -- Returns all rows when there is a match in either left or right table.
+   -- If there is no match, NULL values are returned for the columns of the table without a match.
+   SELECT columns
+   FROM table1
+   FULL OUTER JOIN table2 ON table1.common_column = table2.common_column;
+
+5. CROSS JOIN:
+   -- Returns the Cartesian product of the two tables, meaning all possible combinations of rows.
+   SELECT columns
+   FROM table1
+   CROSS JOIN table2;
+
+6. SELF JOIN:
+   -- A table is joined with itself to combine rows based on a related column.
+   SELECT a.columns, b.columns
+   FROM table_name a, table_name b
+   WHERE a.common_column = b.common_column;
+
+7. JOIN with USING:
+   -- Simplifies syntax when the column names are the same in both tables.
+   SELECT columns
+   FROM table1
+   JOIN table2 USING (common_column);
+\end{lstlisting}
+
+\end{document}
